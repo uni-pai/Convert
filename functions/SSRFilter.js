@@ -154,21 +154,18 @@ exports.handler = function (event, context, callback) {
             "Content-Type": "text/plain; charset=utf-8"
           },
           statusCode: 200,
-          body: JSON.stringify(processedLinks)
+          body: JSON.stringify(ssrInfos)
         });
       }
       //#endregion
 
 
-
-
-      // DEBUG
       return callback(null, {
         headers: {
           "Content-Type": "text/plain; charset=utf-8"
         },
         statusCode: 200,
-        body: JSON.stringify(processedLinks)
+        body: JSON.stringify(ssrInfos)
       });
     } catch (e) {
       return callback(null, {
@@ -176,10 +173,9 @@ exports.handler = function (event, context, callback) {
           "Content-Type": "text/plain; charset=utf-8"
         },
         statusCode: 500,
-        body: "Unexpected Error.\n" + JSON.stringify(e)
+        body: "Runtime Error.\n" + JSON.stringify(e)
       });
     }
-
   }).catch(error => {
     // 404
     if (error && !isNaN(error.status)) {
