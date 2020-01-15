@@ -1,5 +1,6 @@
 const fly = require("flyio");
 const atob = require('atob');
+const btoa = require('btoa');
 const isUrl = require('is-url');
 const URLSafeBase64 = require('urlsafe-base64');
 
@@ -167,7 +168,7 @@ exports.handler = function (event, context, callback) {
             "Content-Type": "text/plain; charset=utf-8"
           },
           statusCode: 200,
-          body: URLSafeBase64.encode(ssrLinks.join('\n'))
+          body: btoa(ssrLinks.join('\n'))
         });
       }
       //#endregion
