@@ -53,7 +53,7 @@ exports.handler = function (event, context, callback) {
       const decodedStr = URLSafeBase64.decode(encodedStr).toString();
       const requiredParams = decodedStr.split(':');
       if (requiredParams.length != 6) {
-        continue;
+        return true;
       }
       host = requiredParams[0];
       port = requiredParams[1];
@@ -126,15 +126,15 @@ exports.handler = function (event, context, callback) {
       //#region 协议根据名称进行过滤
 
       if (filter && filter != "" && !new RegExp(filter).test(result.remarks)) {
-        continue;
+        return true;
       }
       if (remove && remove != "" && new RegExp(remove).test(result.remarks)) {
-        continue;
+        return true;
       }
 
       //#endregion
 
-      ssrInfos.push(result)
+      ssrInfos.push(result);
     });
     if (ssrInfos.length == 0) {
       return callback(null, {
@@ -158,7 +158,7 @@ exports.handler = function (event, context, callback) {
     }
     //#endregion
 
-    
+
 
 
     // DEBUG
