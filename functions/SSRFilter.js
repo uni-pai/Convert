@@ -11,6 +11,7 @@ exports.handler = function (event, context, callback) {
   const url = queryStringParameters['src'];
   const remove = queryStringParameters['remove']; //正则
   const filter = queryStringParameters['filter']; //正则
+  const preview = queryStringParameters['preview']; //任意值,有值就预览
 
   if (!isUrl(url)) {
     return callback(null, {
@@ -145,6 +146,20 @@ exports.handler = function (event, context, callback) {
       });
     }
     //#endregion
+    //#region 预览专用
+    if (preview) {
+      return callback(null, {
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8"
+        },
+        statusCode: 200,
+        body: JSON.stringify(processedLinks)
+      });
+    }
+    //#endregion
+
+    
+
 
     // DEBUG
     return callback(null, {
