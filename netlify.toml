@@ -1,6 +1,6 @@
 [build]
   functions = "./functions"
-  command = "yarn build"
+  command = "npm build"
 
 [build.environment]
   NODE_VERSION = "12"
