@@ -47,6 +47,7 @@ exports.handler = function (event, context, callback) {
 
       //#region 协议具体内容获取
       const ssrInfos = new Array();
+      const ssrLinks = new Array();
       filteredLinks.forEach(link => {
         let host, port, protocol, method, obfs, base64password, password;
         let base64obfsparam, obfsparam, base64protoparam, protoparam, base64remarks, remarks, base64group, group, udpport, uot;
@@ -134,7 +135,7 @@ exports.handler = function (event, context, callback) {
         }
 
         //#endregion
-
+        ssrLinks.push(link);
         ssrInfos.push(result);
       });
       if (ssrInfos.length == 0) {
@@ -147,26 +148,29 @@ exports.handler = function (event, context, callback) {
         });
       }
       //#endregion
-      //#region 预览专用
+      //#region 结果拼接
       if (preview) {
         return callback(null, {
           headers: {
             "Content-Type": "text/plain; charset=utf-8"
           },
           statusCode: 200,
-          body: JSON.stringify(ssrInfos)
+          body: JSON.stringify({
+            ssrInfos,
+            ssrLinks
+          })
+        });
+      } else {
+        
+        return callback(null, {
+          headers: {
+            "Content-Type": "text/plain; charset=utf-8"
+          },
+          statusCode: 200,
+          body: URLSafeBase64.encode(ssrLinks.join('\n'))
         });
       }
       //#endregion
-
-
-      return callback(null, {
-        headers: {
-          "Content-Type": "text/plain; charset=utf-8"
-        },
-        statusCode: 200,
-        body: JSON.stringify(ssrInfos)
-      });
     } catch (e) {
       return callback(null, {
         headers: {
