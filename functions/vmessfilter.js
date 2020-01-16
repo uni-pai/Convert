@@ -53,9 +53,9 @@ exports.handler = function (event, context, callback) {
           let encodedStr = link.replace(/vmess:\/\//, "");
           const decodedStr = URLSafeBase64.decode(encodedStr).toString();
           const vmessObj = JSON.parse(decodedStr)
-          if (vmessObj.add && vmessObj.port) {
-            vmessObj.ps = URLSafeBase64.decode(vmessObj.ps).toString();
-          }
+        //   if (vmessObj.add && vmessObj.port) {
+        //     vmessObj.ps = URLSafeBase64.decode(vmessObj.ps).toString();
+        //   }
           //#region 协议根据名称进行过滤
 
           if (filter && filter != "" && !new RegExp(filter).test(vmessObj.ps)) {
