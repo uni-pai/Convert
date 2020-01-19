@@ -1,44 +1,19 @@
-# 节点转换过滤
+# ConfigConverter
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b8d38664-9076-461a-aa8e-d419ee365f9c/deploy-status)](https://app.netlify.com/sites/config-converter/deploys)
 
-我们的特色是:**开源!!!开源!!!开源!!!** 自部署!!!!自部署!!!!自部署!!!!
-
-功能开源,自己拿过去部署即可
-
-## WHY
-
-我有一个机场,里面有七八十个节点,每次测速都要好久
-
-其实我只需要几个香港的节点
-
-所以萌生了把节点过滤一下的考虑
-
-<img src="assets/image-20200116151711944.png" alt="image-20200116151711944" style="zoom:67%;" />
+将各种代理软件的配置文件进行转换
 
 ## API Endpoint
 
-使用方式请参考 [部署与说明文档](https://www.markeditor.com/file/get/eb581bd61fad7c345853e2ac1a5482f8?t=1574667122)
+演示地址为 `https://config-converter.netlify.com/` 后接以下入口
 
-- `/api/SSRFilter` SSR订阅节点过滤
-- `api/vmessfilter` V2RAY订阅节点过滤
-
-|       地址       |       功能        |  参数   |                  说明                   |
-| :--------------: | :---------------: | :-----: | :-------------------------------------: |
-|  /api/SSRFilter  |  SSR订阅节点过滤  |   src   |                订阅地址                 |
-|                  |                   | filter  | 要显示的节点名称正则表达式(需UrlEncode) |
-|                  |                   | remove  |   要移除的节点正则表达式(需UrlEncode)   |
-|                  |                   | preview |      只要有值就直接预览生成的结果       |
-| /api/vmessfilter | V2RAY订阅节点过滤 |   src   |                订阅地址                 |
-|                  |                   | filter  | 要显示的节点名称正则表达式(需UrlEncode) |
-|                  |                   | remove  |   要移除的节点正则表达式(需UrlEncode)   |
-|                  |                   | preview |      只要有值就直接预览生成的结果       |
-|                  |                   |         |                                         |
-
-例如
-
-test.netlify.com/api/vmessfilter?preview=yes&filter=香港&src=你的订阅地址
+- `/api/SurgeProfile2SurgeList` 将 Surge 配置文件转换为 List
+- `/api/QuantumultXScriptAddDeviceID` [将 QX 脚本中添加设备 ID](https://t.me/singee_daily/10)
+- `/api/QuantumultXScriptSubscriptionAddDeviceID` [自动为 QX 脚本订阅添加设备 ID 行](https://t.me/singee_daily/7)
 
 
 ## 自部署
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/sazs34/Convert)
+上述网址仅供演示使用，随时可能停止。自行使用请点击下面按钮部署至 netlify
 
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ImSingee/ConfigConverter)
