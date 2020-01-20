@@ -1033,8 +1033,7 @@ let getFlag = name => {
   for (var x = 0; x < nationalFlag.length; x++) {
     for (var y = 0; y < nationalFlag[x].length; y++) {
       if (name.indexOf(nationalFlag[x][y]) >= 0) {
-        result = nationalFlag[x][y];
-        return result;
+        return nationalFlag[x][y];
       }
     }
   }

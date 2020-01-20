@@ -15,7 +15,7 @@ exports.handler = function (event, context, callback) {
   const remove = queryStringParameters['remove']; //正则
   const filter = queryStringParameters['filter']; //正则
   const preview = queryStringParameters['preview']; //yes则预览,不传不预览
-  const flag = queryStringParameters['flag']; //是否添加国旗,不传不处理,0不处理,1前面加国旗,2后面加国旗,9移除国旗(如果有)
+  const flag = queryStringParameters['flag']; //是否添加国旗,不传不处理,left:前面加国旗,right:后面加国旗,remove:移除国旗(如果有)
 
   if (!isUrl(url)) {
     return callback(null, {
@@ -63,7 +63,11 @@ exports.handler = function (event, context, callback) {
         if (remove && remove != "" && new RegExp(remove).test(result.remarks)) {
           return true;
         }
-        result.remarks = emoji.flagProcess(result.remarks, flag);
+        try {
+          result.remarks = emoji.flagProcess(result.remarks, flag);
+        } catch (e) {
+          result.remarks += "-----" + JSON.stringify(e);
+        }
 
         //#endregion
         ssrLinks.push(link);
