@@ -1049,7 +1049,19 @@ let removeFlag = name => {
   }
   return name;
 }
-export default {
+
+let flagProcess = (name, type) => {
+  if (type == 'left') {
+    name = emoji.getFlag(name) + name;
+  } else if (type == 'right') {
+    name += emoji.getFlag(name);
+  } else if (type == 'remove') {
+    name = emoji.removeFlag(name);
+  }
+  return name;
+}
+module.exports = {
   getFlag,
-  removeFlag
+  removeFlag,
+  flagProcess,
 }

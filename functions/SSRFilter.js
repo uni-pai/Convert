@@ -2,18 +2,20 @@ const fly = require("flyio");
 const atob = require('atob');
 const btoa = require('btoa');
 const isUrl = require('is-url');
-const URLSafeBase64 = require('urlsafe-base64');
 const ssr = require('./addin/ssr');
+const emoji = require('./addin/emoji');
 
 exports.handler = function (event, context, callback) {
   const {
     queryStringParameters
   } = event;
 
-  const url = queryStringParameters['src'];
+  const url = queryStringParameters['sub'];
+
   const remove = queryStringParameters['remove']; //正则
   const filter = queryStringParameters['filter']; //正则
-  const preview = queryStringParameters['preview']; //任意值,有值就预览
+  const preview = queryStringParameters['preview']; //yes则预览,不传不预览
+  const flag = queryStringParameters['flag']; //是否添加国旗,不传不处理,0不处理,1前面加国旗,2后面加国旗,9移除国旗(如果有)
 
   if (!isUrl(url)) {
     return callback(null, {
@@ -61,6 +63,7 @@ exports.handler = function (event, context, callback) {
         if (remove && remove != "" && new RegExp(remove).test(result.remarks)) {
           return true;
         }
+        result.remarks = emoji.flagProcess(result.remarks, flag);
 
         //#endregion
         ssrLinks.push(link);
@@ -89,7 +92,6 @@ exports.handler = function (event, context, callback) {
           })
         });
       } else {
-
         return callback(null, {
           headers: {
             "Content-Type": "text/plain; charset=utf-8"

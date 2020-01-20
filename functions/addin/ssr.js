@@ -1,17 +1,21 @@
 const URLSafeBase64 = require('urlsafe-base64');
 let analyseSSR = ssrLink => {
   if (!ssrLink) return null;
-  let type = "";
   let encodedStr = "";
-  if (ssrLink.indexOf("ssr:") == 0) {
-    type = "ssr";
-    encodedStr = ssrLink.replace(/ssr:\/\//, "");
-  } else if (ssrLink.indexOf("ss:") == 0) {
+  if (ssrLink.startsWith('ss://')) {
     type = "ss";
     encodedStr = ssrLink.replace(/sr:\/\//, "");
+    return ssrProcess(encodedStr);
+  } else if (ssrLink.startsWith('ssr://')) {
+    type = "ssr";
+    encodedStr = ssrLink.replace(/ssr:\/\//, "");
+    return ssProcess(encodedStr);
   } else {
     return null;
   }
+}
+
+let ssrProcess = encodedStr => {
   let host, port, protocol, method, obfs, base64password, password;
   let base64obfsparam, obfsparam, base64protoparam, protoparam, base64remarks, remarks, base64group, group, udpport, uot;
 
@@ -68,8 +72,8 @@ let analyseSSR = ssrLink => {
     })
   }
 
-  result = {
-    type,
+  return {
+    type: 'ssr',
     host,
     port,
     protocol,
@@ -88,11 +92,39 @@ let analyseSSR = ssrLink => {
     udpport,
     uot
   }
+}
+let ssProcess = encodedStr => {
+  let host, port, protocol, method, remarks;
 
-  return result;
+  let regexMatch = encodedStr.match(/#(.*?)$/);
+  if (regexMatch != null) {
+    remarks = decodeURIComponent(regexMatch[1]);
+  }
+  const decodedStr = URLSafeBase64.decode(encodedStr.split('#')[0]).toString();
+  const requiredParams = decodedStr.split('@');
+  if (requiredParams.length < 2) {
+    return null;
+  }
+  var encrypt = requiredParams[0].split(':');
+  method = encrypt[0];
+  password = encrypt[1];
+  var addr = requiredParams[1].split(':');
+  host = addr[0];
+  port = addr[1];
+  remarks = requiredParams[2];
+  return {
+    type: 'ss',
+    host,
+    port,
+    protocol,
+    method,
+    remarks
+  }
 }
 
 
 module.exports = {
-  analyseSSR
+  analyseSSR,
+  ssrProcess,
+  ssProcess
 }
