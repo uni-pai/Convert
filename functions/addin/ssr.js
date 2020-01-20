@@ -2,16 +2,19 @@ const URLSafeBase64 = require('urlsafe-base64');
 let analyseSSR = ssrLink => {
   if (!ssrLink) return null;
   let type = "";
-  if (ssrLink.indexOf("ssr:") != 0) {
+  let encodedStr = "";
+  if (ssrLink.indexOf("ssr:") == 0) {
     type = "ssr";
-  } else if (ssrLink.indexOf("ss:") != 0) {
+    encodedStr = ssrLink.replace(/ssr:\/\//, "");
+  } else if (ssrLink.indexOf("ss:") == 0) {
     type = "ss";
+    encodedStr = ssrLink.replace(/sr:\/\//, "");
   } else {
     return null;
   }
   let host, port, protocol, method, obfs, base64password, password;
   let base64obfsparam, obfsparam, base64protoparam, protoparam, base64remarks, remarks, base64group, group, udpport, uot;
-  let encodedStr = ssrLink.replace(/ssr:\/\//, "");
+
   const decodedStr = URLSafeBase64.decode(encodedStr).toString();
   const requiredParams = decodedStr.split(':');
   if (requiredParams.length != 6) {
