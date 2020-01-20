@@ -3,9 +3,9 @@ let analyseSSR = ssrLink => {
   if (!ssrLink) return null;
   let encodedStr = "";
   if (ssrLink.startsWith('ss://')) {
-    return ssProcess(encodedStr);
+    return ssProcess(ssrLink);
   } else if (ssrLink.startsWith('ssr://')) {
-    return ssrProcess(encodedStr);
+    return ssrProcess(ssrLink);
   } else {
     return null;
   }
