@@ -3,22 +3,18 @@ let analyseSSR = ssrLink => {
   if (!ssrLink) return null;
   let encodedStr = "";
   if (ssrLink.startsWith('ss://')) {
-    type = "ss";
-    encodedStr = ssrLink.replace(/sr:\/\//, "");
-    return ssrProcess(encodedStr);
-  } else if (ssrLink.startsWith('ssr://')) {
-    type = "ssr";
-    encodedStr = ssrLink.replace(/ssr:\/\//, "");
     return ssProcess(encodedStr);
+  } else if (ssrLink.startsWith('ssr://')) {
+    return ssrProcess(encodedStr);
   } else {
     return null;
   }
 }
 
-let ssrProcess = encodedStr => {
+let ssrProcess = ssrLink => {
   let host, port, protocol, method, obfs, base64password, password;
   let base64obfsparam, obfsparam, base64protoparam, protoparam, base64remarks, remarks, base64group, group, udpport, uot;
-
+  const encodedStr = ssrLink.replace(/ssr:\/\//, "");
   const decodedStr = URLSafeBase64.decode(encodedStr).toString();
   const requiredParams = decodedStr.split(':');
   if (requiredParams.length != 6) {
@@ -93,9 +89,10 @@ let ssrProcess = encodedStr => {
     uot
   }
 }
-let ssProcess = encodedStr => {
+let ssProcess = ssrLink => {
   let host, port, protocol, method, remarks;
 
+  const encodedStr = ssrLink.replace(/ss:\/\//, "");
   let regexMatch = encodedStr.match(/#(.*?)$/);
   if (regexMatch != null) {
     remarks = decodeURIComponent(regexMatch[1]);
