@@ -108,7 +108,6 @@ let ssProcess = ssLink => {
   var addr = requiredParams[1].split(':');
   host = addr[0];
   port = addr[1];
-  remarks = requiredParams[2];
   return {
     type: 'ss',
     host,
