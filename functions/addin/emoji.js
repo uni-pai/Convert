@@ -1033,7 +1033,7 @@ let getFlag = name => {
   for (var x = 0; x < nationalFlag.length; x++) {
     for (var y = 0; y < nationalFlag[x].length; y++) {
       if (name.indexOf(nationalFlag[x][y]) >= 0) {
-        return nationalFlag[x][y];
+        return nationalFlag[x][0];
       }
     }
   }
@@ -1060,6 +1060,7 @@ let flagProcess = (name, type) => {
   }
   return name;
 }
+
 module.exports = {
   getFlag,
   removeFlag,
