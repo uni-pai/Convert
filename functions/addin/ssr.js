@@ -1,7 +1,6 @@
 const URLSafeBase64 = require('urlsafe-base64');
 let analyseSSR = ssrLink => {
   if (!ssrLink) return null;
-  let encodedStr = "";
   if (ssrLink.startsWith('ss://')) {
     return ssProcess(ssrLink);
   } else if (ssrLink.startsWith('ssr://')) {

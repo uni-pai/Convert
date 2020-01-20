@@ -23,7 +23,7 @@ exports.handler = function (event, context, callback) {
         "Content-Type": "text/plain; charset=utf-8"
       },
       statusCode: 400,
-      body: "参数 src 无效，请检查是否提供了正确的节点订阅地址。"
+      body: "参数 sub 无效，请检查是否提供了正确的节点订阅地址。"
     });
   }
 
