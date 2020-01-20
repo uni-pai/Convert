@@ -1,4 +1,4 @@
-import URLSafeBase64 from 'urlsafe-base64';
+const URLSafeBase64 = require('urlsafe-base64');
 let analyseSSR = ssrLink => {
   if (!ssrLink) return null;
   let type = "";
