@@ -5,8 +5,6 @@
 
 ## API Endpoint
 
-演示地址为 `https://config-converter.netlify.com/` 后接以下入口
-
 - `/api/SSRFilter` 对SSR订阅进行筛选
 
 
