@@ -141,7 +141,7 @@ let getSsrShareLink = ssrEntity => {
     optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
   }
   decodedStr += optionalParams;
-  return `${ssrLink}${decodedStr}`;
+  return `${ssrLink}${Base64.encode(decodedStr)}`;
 }
 
 
