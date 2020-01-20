@@ -1027,7 +1027,29 @@ let nationalFlag = [
     "🇿🇼",
     "ZW"
   ]
-]
+];
+let getFlag = name => {
+  var result = "";
+  for (var x = 0; x < nationalFlag.length; x++) {
+    for (var y = 0; y < nationalFlag[x].length; y++) {
+      if (name.indexOf(nationalFlag[x][y]) >= 0) {
+        result = nationalFlag[x][y];
+        return result;
+      }
+    }
+  }
+  return result;
+}
+let removeFlag = name => {
+  for (var x = 0; x < nationalFlag.length; x++) {
+    if (name.indexOf(nationalFlag[x][0]) >= 0) {
+      name = name.replace(nationalFlag[x][0], '');
+      break;
+    }
+  }
+  return name;
+}
 export default {
-  nationalFlag
+  getFlag,
+  removeFlag
 }
