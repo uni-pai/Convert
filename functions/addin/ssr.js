@@ -90,6 +90,6 @@ let analyseSSR = ssrLink => {
 }
 
 
-export default {
+module.exports = {
   analyseSSR
 }
