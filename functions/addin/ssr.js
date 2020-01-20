@@ -1,5 +1,5 @@
 const URLSafeBase64 = require('urlsafe-base64');
-var Base64 = require('js-base64').Base64;
+var Base64 = require('base64-js').Base64;
 let analyseSSR = ssrLink => {
   if (!ssrLink) return null;
   if (ssrLink.startsWith('ss://')) {
