@@ -63,11 +63,7 @@ exports.handler = function (event, context, callback) {
         if (remove && remove != "" && new RegExp(remove).test(result.remarks)) {
           return true;
         }
-        try {
-          result.remarks = emoji.flagProcess(result.remarks, flag);
-        } catch (e) {
-          result.remarks += "-----" + JSON.stringify(e);
-        }
+        result.remarks = emoji.flagProcess(result.remarks, flag);
 
         //#endregion
         ssrLinks.push(link);

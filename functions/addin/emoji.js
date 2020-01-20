@@ -1050,12 +1050,13 @@ let removeFlag = name => {
 }
 
 let flagProcess = (name, type) => {
+  if (!name) return "";
   if (type == 'left') {
-    name = emoji.getFlag(name) + name;
+    name = getFlag(name) + name;
   } else if (type == 'right') {
-    name += emoji.getFlag(name);
+    name += getFlag(name);
   } else if (type == 'remove') {
-    name = emoji.removeFlag(name);
+    name = removeFlag(name);
   }
   return name;
 }
