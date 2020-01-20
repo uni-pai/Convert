@@ -14,7 +14,7 @@ let analyseSSR = ssrLink => {
 let ssrProcess = ssrLink => {
   let host, port, protocol, method, obfs, base64password, password;
   let base64obfsparam, obfsparam, base64protoparam, protoparam, base64remarks, remarks, base64group, group, udpport, uot;
-  const encodedStr = ssrLink.replace(/ssr:\/\//, "");
+  const encodedStr = ssrLink.startsWith('ssr://') ? ssrLink.replace(/ssr:\/\//, "") : ssrLink;
   const decodedStr = URLSafeBase64.decode(encodedStr).toString();
   const requiredParams = decodedStr.split(':');
   if (requiredParams.length != 6) {
@@ -89,10 +89,10 @@ let ssrProcess = ssrLink => {
     uot
   }
 }
-let ssProcess = ssrLink => {
+let ssProcess = ssLink => {
   let host, port, protocol, method, remarks;
 
-  const encodedStr = ssrLink.replace(/ss:\/\//, "");
+  const encodedStr = ssLink.startsWith('ss://') ? ssLink.replace(/ss:\/\//, "") : ssLink;
   let regexMatch = encodedStr.match(/#(.*?)$/);
   if (regexMatch != null) {
     remarks = decodeURIComponent(regexMatch[1]);
