@@ -1,4 +1,5 @@
 const URLSafeBase64 = require('urlsafe-base64');
+var Base64 = require('js-base64').Base64;
 let analyseSSR = ssrLink => {
   if (!ssrLink) return null;
   if (ssrLink.startsWith('ss://')) {
@@ -128,7 +129,7 @@ let getSsrShareLink = ssrEntity => {
     optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
   }
   if (ssrEntity.base64remarks) {
-    optionalParams += `${optionalParams==""?"":"&"}remarks=${ssrEntity.base64remarks}`
+    optionalParams += `${optionalParams==""?"":"&"}remarks=${Base64.encode(ssrEntity.remarks)}`
   }
   if (ssrEntity.base64group) {
     optionalParams += `${optionalParams==""?"":"&"}group=${ssrEntity.base64group}`
@@ -148,5 +149,5 @@ module.exports = {
   analyseSSR,
   ssrProcess,
   ssProcess,
-  getSsrShareLink,
+  getSsrShareLink
 }
