@@ -142,7 +142,7 @@ let getSsrShareLink = ssrEntity => {
       optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
     }
     decodedStr += `${optionalParams==""?"":"?"}${optionalParams}}`;
-    return `${ssrLink}${btoa(decodedStr)}--${JSON.stringify(ssrEntity)}`;
+    return `${ssrLink}${btoa(decodedStr)}`;
   } catch (e) {
     return JSON.stringify(e) + `${JSON.stringify(ssrEntity)}`;
   }
