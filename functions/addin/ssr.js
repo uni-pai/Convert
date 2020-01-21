@@ -1,5 +1,5 @@
 const URLSafeBase64 = require('urlsafe-base64');
-var Base64 = require('base64-js').Base64;
+const btoa = require('btoa');
 let analyseSSR = ssrLink => {
   if (!ssrLink) return null;
   if (ssrLink.startsWith('ss://')) {
@@ -129,9 +129,9 @@ let getSsrShareLink = ssrEntity => {
     if (ssrEntity.base64protoparam) {
       optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
     }
-    // if (ssrEntity.base64remarks) {
-    //   optionalParams += `${optionalParams==""?"":"&"}remarks=${Base64.encode(ssrEntity.remarks)}`
-    // }
+    if (ssrEntity.base64remarks) {
+      optionalParams += `${optionalParams==""?"":"&"}remarks=${btoa(ssrEntity.remarks)}`
+    }
     if (ssrEntity.base64group) {
       optionalParams += `${optionalParams==""?"":"&"}group=${ssrEntity.base64group}`
     }
@@ -142,8 +142,7 @@ let getSsrShareLink = ssrEntity => {
       optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
     }
     decodedStr += `${optionalParams==""?"":"?"}${optionalParams}`;
-    // return `${ssrLink}${Base64.encode(decodedStr)}`;
-    return `${ssrLink}${decodedStr}`;
+    return `${ssrLink}${btoa(decodedStr)}`;
   } catch (e) {
     return JSON.stringify(e) + `${JSON.stringify(ssrEntity)}`;
   }
