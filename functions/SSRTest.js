@@ -52,17 +52,14 @@ exports.handler = function (event, context, callback) {
       //#region 协议具体内容获取
       const ssrInfos = new Array();
       const ssrLinks = new Array();
-      filteredLinks.forEach(link => {
+      for (var linkIndex = 0; linkIndex < filteredLinks.length; linkIndex++) {
+        var link = filteredLinks[linkIndex];
         var result = ssr.analyseSSR(link);
-        if (result == null) return true;
+        if (result == null) continue;
         //#region 协议根据名称进行过滤
 
-        if (filter && filter != "" && !new RegExp(filter).test(result.remarks)) {
-          return true;
-        }
-        if (remove && remove != "" && new RegExp(remove).test(result.remarks)) {
-          return true;
-        }
+        if (filter && filter != "" && !new RegExp(filter).test(result.remarks)) continue;
+        if (remove && remove != "" && new RegExp(remove).test(result.remarks)) continue;
         if (flag) {
           result.remarks = emoji.flagProcess(result.remarks, flag);
           ssrLinks.push(ssr.getSsrShareLink(result));
@@ -72,7 +69,7 @@ exports.handler = function (event, context, callback) {
 
         //#endregion
         ssrInfos.push(result);
-      });
+      };
       if (ssrInfos.length == 0) {
         return callback(null, {
           headers: {

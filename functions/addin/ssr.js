@@ -119,34 +119,29 @@ let ssProcess = ssLink => {
 }
 
 let getSsrShareLink = ssrEntity => {
-  try {
-    let ssrLink = "ssr://";
-    let decodedStr = `${ssrEntity.host}:${ssrEntity.port}:${ssrEntity.protocol}:${ssrEntity.method}:${ssrEntity.obfs}:${ssrEntity.base64password}/`;
-    let optionalParams = "";
-    if (ssrEntity.base64obfsparam != "" && ssrEntity.base64obfsparam != undefined) {
-      optionalParams += `${optionalParams==""?"":"&"}obfsparam=${ssrEntity.base64obfsparam}`
-    }
-    if (ssrEntity.base64protoparam != "" && ssrEntity.base64protoparam != undefined) {
-      optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
-    }
-    if (ssrEntity.base64remarks) {
-      optionalParams += `${optionalParams==""?"":"&"}remarks=${btoa(ssrEntity.remarks)}`
-    }
-    if (ssrEntity.base64group) {
-      optionalParams += `${optionalParams==""?"":"&"}group=${ssrEntity.base64group}`
-    }
-    if (ssrEntity.udpport) {
-      optionalParams += `${optionalParams==""?"":"&"}udpport=${ssrEntity.udpport}`
-    }
-    if (ssrEntity.uot) {
-      optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
-    }
-    decodedStr += `${optionalParams==""?"":"?"}${optionalParams}}`;
-    return `${ssrLink}${btoa(decodedStr)}`;
-  } catch (e) {
-    return JSON.stringify(e) + `${JSON.stringify(ssrEntity)}`;
+  let ssrLink = "ssr://";
+  let decodedStr = `${ssrEntity.host}:${ssrEntity.port}:${ssrEntity.protocol}:${ssrEntity.method}:${ssrEntity.obfs}:${ssrEntity.base64password}/`;
+  let optionalParams = "";
+  if (ssrEntity.base64obfsparam != "" && ssrEntity.base64obfsparam != undefined) {
+    optionalParams += `${optionalParams==""?"":"&"}obfsparam=${ssrEntity.base64obfsparam}`
   }
-
+  if (ssrEntity.base64protoparam != "" && ssrEntity.base64protoparam != undefined) {
+    optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
+  }
+  if (ssrEntity.base64remarks) {
+    optionalParams += `${optionalParams==""?"":"&"}remarks=${btoa(ssrEntity.remarks)}`
+  }
+  if (ssrEntity.base64group) {
+    optionalParams += `${optionalParams==""?"":"&"}group=${ssrEntity.base64group}`
+  }
+  if (ssrEntity.udpport) {
+    optionalParams += `${optionalParams==""?"":"&"}udpport=${ssrEntity.udpport}`
+  }
+  if (ssrEntity.uot) {
+    optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
+  }
+  decodedStr += `${optionalParams==""?"":"?"}${optionalParams}}`;
+  return `${ssrLink}${btoa(decodedStr)}`;
 }
 
 
