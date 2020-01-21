@@ -61,7 +61,7 @@ exports.handler = function (event, context, callback) {
         if (filter && filter != "" && !new RegExp(filter).test(result.remarks)) continue;
         if (remove && remove != "" && new RegExp(remove).test(result.remarks)) continue;
         if (flag) {
-          result.remarks = emoji.flagProcess(result.remarks, flag);
+          //result.remarks = emoji.flagProcess(result.remarks, flag);
           ssrLinks.push(ssr.getSsrShareLink(result));
         } else {
           ssrLinks.push(link);
