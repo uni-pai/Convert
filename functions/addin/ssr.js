@@ -123,10 +123,10 @@ let getSsrShareLink = ssrEntity => {
     let ssrLink = "ssr://";
     let decodedStr = `${ssrEntity.host}:${ssrEntity.port}:${ssrEntity.protocol}:${ssrEntity.method}:${ssrEntity.obfs}:${ssrEntity.base64password}/`;
     let optionalParams = "";
-    if (ssrEntity.base64obfsparam) {
+    if (ssrEntity.base64obfsparam != "" && ssrEntity.base64obfsparam != undefined) {
       optionalParams += `${optionalParams==""?"":"&"}obfsparam=${ssrEntity.base64obfsparam}`
     }
-    if (ssrEntity.base64protoparam) {
+    if (ssrEntity.base64protoparam != "" && ssrEntity.base64protoparam != undefined) {
       optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
     }
     if (ssrEntity.base64remarks) {
@@ -141,8 +141,8 @@ let getSsrShareLink = ssrEntity => {
     if (ssrEntity.uot) {
       optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
     }
-    decodedStr += `${optionalParams==""?"":"?"}${optionalParams}`;
-    return `${ssrLink}${btoa(decodedStr)}`;
+    decodedStr += `${optionalParams==""?"":"?"}${optionalParams}}`;
+    return `${ssrLink}${btoa(decodedStr)}--${JSON.stringify(ssrEntity)}`;
   } catch (e) {
     return JSON.stringify(e) + `${JSON.stringify(ssrEntity)}`;
   }
