@@ -140,7 +140,7 @@ let getSsrShareLink = ssrEntity => {
   if (ssrEntity.uot) {
     optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
   }
-  decodedStr += `${optionalParams==""?"":"?"}${optionalParams}}`;
+  decodedStr += `${optionalParams==""?"":"?"}${optionalParams}`;
   return `${ssrLink}${btoa(decodedStr)}`;
 }
 
