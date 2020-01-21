@@ -128,7 +128,7 @@ let getSsrShareLink = ssrEntity => {
   if (ssrEntity.base64protoparam != "" && ssrEntity.base64protoparam != undefined) {
     optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
   }
-  if (ssrEntity.base64remarks) {
+  if (ssrEntity.remarks) {
     optionalParams += `${optionalParams==""?"":"&"}remarks=${btoa(ssrEntity.remarks)}`
   }
   if (ssrEntity.base64group) {
