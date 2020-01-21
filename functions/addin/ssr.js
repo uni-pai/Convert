@@ -119,29 +119,34 @@ let ssProcess = ssLink => {
 }
 
 let getSsrShareLink = ssrEntity => {
-  let ssrLink = "ssr://";
-  let decodedStr = `${ssrEntity.host}:${ssrEntity.port}:${ssrEntity.protocol}:${ssrEntity.method}:${ssrEntity.obfs}:${ssrEntity.base64password}/`;
-  let optionalParams = "";
-  if (ssrEntity.base64obfsparam) {
-    optionalParams += `${optionalParams==""?"":"&"}obfsparam=${ssrEntity.base64obfsparam}`
+  try {
+    let ssrLink = "ssr://";
+    let decodedStr = `${ssrEntity.host}:${ssrEntity.port}:${ssrEntity.protocol}:${ssrEntity.method}:${ssrEntity.obfs}:${ssrEntity.base64password}/`;
+    let optionalParams = "";
+    if (ssrEntity.base64obfsparam) {
+      optionalParams += `${optionalParams==""?"":"&"}obfsparam=${ssrEntity.base64obfsparam}`
+    }
+    if (ssrEntity.base64protoparam) {
+      optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
+    }
+    if (ssrEntity.base64remarks) {
+      optionalParams += `${optionalParams==""?"":"&"}remarks=${Base64.encode(ssrEntity.remarks)}`
+    }
+    if (ssrEntity.base64group) {
+      optionalParams += `${optionalParams==""?"":"&"}group=${ssrEntity.base64group}`
+    }
+    if (ssrEntity.udpport) {
+      optionalParams += `${optionalParams==""?"":"&"}udpport=${ssrEntity.udpport}`
+    }
+    if (ssrEntity.uot) {
+      optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
+    }
+    decodedStr += `${optionalParams==""?"":"?"}${optionalParams}`;
+    return `${ssrLink}${Base64.encode(decodedStr)}`;
+  } catch (e) {
+    return JSON.stringify(e);
   }
-  if (ssrEntity.base64protoparam) {
-    optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
-  }
-  if (ssrEntity.base64remarks) {
-    optionalParams += `${optionalParams==""?"":"&"}remarks=${Base64.encode(ssrEntity.remarks)}`
-  }
-  if (ssrEntity.base64group) {
-    optionalParams += `${optionalParams==""?"":"&"}group=${ssrEntity.base64group}`
-  }
-  if (ssrEntity.udpport) {
-    optionalParams += `${optionalParams==""?"":"&"}udpport=${ssrEntity.udpport}`
-  }
-  if (ssrEntity.uot) {
-    optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
-  }
-  decodedStr += optionalParams;
-  return `${ssrLink}${Base64.encode(decodedStr)}`;
+
 }
 
 
