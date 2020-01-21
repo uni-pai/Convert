@@ -123,8 +123,8 @@ let getSsrShareLink = ssrEntity => {
     let ssrLink = "ssr://";
     let decodedStr = `${ssrEntity.host}:${ssrEntity.port}:${ssrEntity.protocol}:${ssrEntity.method}:${ssrEntity.obfs}:${ssrEntity.base64password}/`;
     let optionalParams = "";
-    optionalParams += `?obfsparam=${ssrEntity.base64obfsparam}`
-    optionalParams += `&protoparam=${ssrEntity.base64protoparam}`
+    optionalParams += `?obfsparam=${ssrEntity.base64obfsparam?"":ssrEntity.base64obfsparam}`
+    optionalParams += `&protoparam=${ssrEntity.base64protoparam?"":ssrEntity.base64protoparam}`
     if (ssrEntity.base64remarks) {
       optionalParams += `&remarks=${btoa(ssrEntity.remarks)}`
     }
