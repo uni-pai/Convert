@@ -123,25 +123,21 @@ let getSsrShareLink = ssrEntity => {
     let ssrLink = "ssr://";
     let decodedStr = `${ssrEntity.host}:${ssrEntity.port}:${ssrEntity.protocol}:${ssrEntity.method}:${ssrEntity.obfs}:${ssrEntity.base64password}/`;
     let optionalParams = "";
-    if (ssrEntity.base64obfsparam) {
-      optionalParams += `${optionalParams==""?"":"&"}obfsparam=${ssrEntity.base64obfsparam}`
-    }
-    if (ssrEntity.base64protoparam) {
-      optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
-    }
+    optionalParams += `?obfsparam=${ssrEntity.base64obfsparam}`
+    optionalParams += `&protoparam=${ssrEntity.base64protoparam}`
     if (ssrEntity.base64remarks) {
-      optionalParams += `${optionalParams==""?"":"&"}remarks=${btoa(ssrEntity.remarks)}`
+      optionalParams += `&remarks=${btoa(ssrEntity.remarks)}`
     }
     if (ssrEntity.base64group) {
-      optionalParams += `${optionalParams==""?"":"&"}group=${ssrEntity.base64group}`
+      optionalParams += `&group=${ssrEntity.base64group}`
     }
     if (ssrEntity.udpport) {
-      optionalParams += `${optionalParams==""?"":"&"}udpport=${ssrEntity.udpport}`
+      optionalParams += `&udpport=${ssrEntity.udpport}`
     }
     if (ssrEntity.uot) {
-      optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
+      optionalParams += `&uot=${ssrEntity.uot}`
     }
-    decodedStr += `${optionalParams==""?"":"?"}${optionalParams}`;
+    decodedStr += optionalParams;
     return `${ssrLink}${btoa(decodedStr)}`;
   } catch (e) {
     return JSON.stringify(e) + `${JSON.stringify(ssrEntity)}`;
