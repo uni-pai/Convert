@@ -129,9 +129,9 @@ let getSsrShareLink = ssrEntity => {
     if (ssrEntity.base64protoparam) {
       optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
     }
-    if (ssrEntity.base64remarks) {
-      optionalParams += `${optionalParams==""?"":"&"}remarks=${Base64.encode(ssrEntity.remarks)}`
-    }
+    // if (ssrEntity.base64remarks) {
+    //   optionalParams += `${optionalParams==""?"":"&"}remarks=${Base64.encode(ssrEntity.remarks)}`
+    // }
     if (ssrEntity.base64group) {
       optionalParams += `${optionalParams==""?"":"&"}group=${ssrEntity.base64group}`
     }
@@ -142,9 +142,10 @@ let getSsrShareLink = ssrEntity => {
       optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
     }
     decodedStr += `${optionalParams==""?"":"?"}${optionalParams}`;
-    return `${ssrLink}${Base64.encode(decodedStr)}`;
+    // return `${ssrLink}${Base64.encode(decodedStr)}`;
+    return `${ssrLink}${decodedStr}`;
   } catch (e) {
-    return JSON.stringify(e);
+    return JSON.stringify(e) + `${JSON.stringify(ssrEntity)}`;
   }
 
 }
