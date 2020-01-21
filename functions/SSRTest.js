@@ -63,11 +63,10 @@ exports.handler = function (event, context, callback) {
         if (remove && remove != "" && new RegExp(remove).test(result.remarks)) {
           return true;
         }
-        if (flag){
+        if (flag) {
           result.remarks = emoji.flagProcess(result.remarks, flag);
           ssrLinks.push(ssr.getSsrShareLink(result));
-        }
-        else{
+        } else {
           ssrLinks.push(link);
         }
 
