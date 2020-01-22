@@ -62,7 +62,10 @@ exports.handler = function (event, context, callback) {
         if (remove && remove != "" && new RegExp(remove).test(result.remarks)) continue;
         if (flag) {
           result.remarks = emoji.flagProcess(result.remarks, flag);
+          ssrLinks.push(link);
           ssrLinks.push(ssr.getSsrShareLink(result));
+          ssrLinks.push('----------------------');
+          ssrLinks.push('----------------------');
         } else {
           ssrLinks.push(link);
         }
@@ -88,8 +91,8 @@ exports.handler = function (event, context, callback) {
           },
           statusCode: 200,
           body: JSON.stringify({
-            ssrInfos,
-            ssrLinks
+            ssrLinks,
+            ssrInfos
           })
         });
       } else {
