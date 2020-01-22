@@ -3,7 +3,7 @@ const atob = require('atob');
 const btoa = require('btoa');
 const isUrl = require('is-url');
 const ssr = require('./addin/ssr');
-const emoji = require('./addin/emoji');
+//const emoji = require('./addin/emoji');
 
 exports.handler = function (event, context, callback) {
   const {
@@ -63,7 +63,7 @@ exports.handler = function (event, context, callback) {
         if (remove && remove != "" && new RegExp(remove).test(result.remarks)) {
           return true;
         }
-        result.remarks = emoji.flagProcess(result.remarks, flag);
+        //result.remarks = emoji.flagProcess(result.remarks, flag);
 
         //#endregion
         ssrLinks.push(link);
