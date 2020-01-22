@@ -129,7 +129,7 @@ let getSsrShareLink = ssrEntity => {
     optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
   }
   if (ssrEntity.remarks) {
-    optionalParams += `${optionalParams==""?"":"&"}remarks=${btoa(ssrEntity.remarks)}`
+    optionalParams += `${optionalParams==""?"":"&"}remarks=${URLSafeBase64.encode(ssrEntity.remarks)}`
   }
   if (ssrEntity.base64group) {
     optionalParams += `${optionalParams==""?"":"&"}group=${ssrEntity.base64group}`
@@ -141,7 +141,7 @@ let getSsrShareLink = ssrEntity => {
     optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
   }
   decodedStr += `${optionalParams==""?"":"?"}${optionalParams}`;
-  return `${ssrLink}${btoa(decodedStr)}`;
+  return `${ssrLink}${URLSafeBase64.encode(decodedStr)}`;
 }
 
 
