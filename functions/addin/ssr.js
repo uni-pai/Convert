@@ -129,7 +129,7 @@ let getSsrShareLink = ssrEntity => {
     optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
   }
   if (ssrEntity.remarks) {
-    optionalParams += `${optionalParams==""?"":"&"}remarks=${URLSafeBase64.encode(ssrEntity.remarks)}`
+    optionalParams += `${optionalParams==""?"":"&"}remarks=${urlSafeBase64Encode(ssrEntity.remarks)}`
   }
   if (ssrEntity.base64group) {
     optionalParams += `${optionalParams==""?"":"&"}group=${ssrEntity.base64group}`
@@ -141,9 +141,14 @@ let getSsrShareLink = ssrEntity => {
     optionalParams += `${optionalParams==""?"":"&"}uot=${ssrEntity.uot}`
   }
   decodedStr += `${optionalParams==""?"":"?"}${optionalParams}`;
-  return `${ssrLink}${URLSafeBase64.encode(decodedStr)}`;
+  return `${ssrLink}${urlSafeBase64Encode(decodedStr)}`;
 }
 
+let urlSafeBase64Encode=ssr=>{
+if (!ssr) return ssr;
+let base64=btoa(ssr);
+return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=/g, '');
+}
 
 module.exports = {
   analyseSSR,
