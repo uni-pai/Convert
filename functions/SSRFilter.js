@@ -63,10 +63,16 @@ exports.handler = function (event, context, callback) {
         if (remove && remove != "" && new RegExp(remove).test(result.remarks)) {
           return true;
         }
-        //result.remarks = emoji.flagProcess(result.remarks, flag);
+        if (flag){
+          result.remarks = emoji.flagProcess(result.remarks, flag);
+          ssrLinks.push(ssr.getSsrShareLink(result));
+        } else {
+          ssrLinks.push(link);
+        }
+        
 
         //#endregion
-        ssrLinks.push(link);
+        
         ssrInfos.push(result);
       });
       if (ssrInfos.length == 0) {
