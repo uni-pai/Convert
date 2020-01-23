@@ -129,7 +129,7 @@ let getSsrShareLink = ssrEntity => {
     optionalParams += `${optionalParams==""?"":"&"}protoparam=${ssrEntity.base64protoparam}`
   }
   if (ssrEntity.remarks) {
-    optionalParams += `${optionalParams==""?"":"&"}remarks=${urlSafeBase64Encode(ssrEntity.remarks)}`
+    optionalParams += `${optionalParams==""?"":"&"}remarks=${urlSafeBase64Encode(unescape(encodeURIComponent(ssrEntity.remarks)))}`
   }
   if (ssrEntity.base64group) {
     optionalParams += `${optionalParams==""?"":"&"}group=${ssrEntity.base64group}`
