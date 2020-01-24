@@ -12,8 +12,8 @@ exports.handler = function (event, context, callback) {
 
   const url = queryStringParameters['sub'];
 
-  const remove = queryStringParameters['remove']; //正则
-  const filter = queryStringParameters['filter']; //正则
+  const exclude = queryStringParameters['exclude']; //正则
+  const include = queryStringParameters['include']; //正则
   const preview = queryStringParameters['preview']; //yes则预览,不传不预览
   const flag = queryStringParameters['flag']; //是否添加国旗,不传不处理,left:前面加国旗,right:后面加国旗,remove:移除国旗(如果有)
 
@@ -57,10 +57,10 @@ exports.handler = function (event, context, callback) {
         if (result == null) return true;
         //#region 协议根据名称进行过滤
 
-        if (filter && filter != "" && !new RegExp(filter).test(result.remarks)) {
+        if (include && include != "" && !new RegExp(include).test(result.remarks)) {
           return true;
         }
-        if (remove && remove != "" && new RegExp(remove).test(result.remarks)) {
+        if (exclude && exclude != "" && new RegExp(exclude).test(result.remarks)) {
           return true;
         }
         if (flag) {
